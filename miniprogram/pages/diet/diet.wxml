@@ -1,0 +1,113 @@
+<view class="container">
+  <!-- 今日摄入概览 -->
+  <view class="overview">
+    <view class="overview-item">
+      <text class="label">今日摄入</text>
+      <text class="value">{{todayCalories}}千卡</text>
+    </view>
+    <view class="overview-item">
+      <text class="label">目标摄入</text>
+      <text class="value">{{targetCalories}}千卡</text>
+    </view>
+    <view class="overview-item">
+      <text class="label">剩余</text>
+      <text class="value {{remainingCalories < 0 ? 'warning' : ''}}">{{remainingCalories}}千卡</text>
+    </view>
+  </view>
+
+  <!-- 添加饮食记录 -->
+  <view class="diet-form">
+    <view class="form-header">
+      <text class="title">添加饮食记录</text>
+    </view>
+    <view class="form-content">
+      <view class="form-item">
+        <text class="label">食物名称</text>
+        <input type="text" 
+               class="input" 
+               placeholder="请输入食物名称" 
+               value="{{foodName}}"
+               bindinput="onFoodNameInput"/>
+      </view>
+      <view class="form-item">
+        <text class="label">份量(g)</text>
+        <input type="digit" 
+               class="input" 
+               placeholder="请输入份量" 
+               value="{{amount}}"
+               bindinput="onAmountInput"/>
+      </view>
+      <view class="form-item">
+        <text class="label">热量(千卡)</text>
+        <input type="digit" 
+               class="input" 
+               placeholder="请输入热量" 
+               value="{{calories}}"
+               bindinput="onCaloriesInput"/>
+      </view>
+      <view class="form-item">
+        <text class="label">用餐时间</text>
+        <picker mode="time" 
+                value="{{time}}" 
+                bindchange="onTimeChange">
+          <view class="picker">
+            {{time || '请选择时间'}}
+          </view>
+        </picker>
+      </view>
+      <view class="form-item">
+        <text class="label">备注</text>
+        <input type="text" 
+               class="input" 
+               placeholder="添加备注（选填）" 
+               value="{{note}}"
+               bindinput="onNoteInput"/>
+      </view>
+      <button class="submit-btn" bindtap="saveDiet">保存记录</button>
+    </view>
+  </view>
+
+  <!-- 今日饮食记录 -->
+  <view class="diet-list">
+    <view class="list-header">
+      <text class="title">今日饮食记录</text>
+    </view>
+    <view class="list-content">
+      <view class="meal-group" wx:for="{{mealGroups}}" wx:key="time">
+        <view class="meal-time">{{item.time}}</view>
+        <view class="meal-items">
+          <view class="meal-item" wx:for="{{item.items}}" wx:for-item="food" wx:key="id">
+            <view class="food-info">
+              <text class="food-name">{{food.name}}</text>
+              <text class="food-amount">{{food.amount}}g</text>
+            </view>
+            <view class="food-calories">
+              <text>{{food.calories}}千卡</text>
+              <button class="delete-btn" 
+                      size="mini" 
+                      bindtap="deleteRecord" 
+                      data-id="{{food.id}}">删除</button>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快速选择食物 -->
+  <view class="quick-select">
+    <view class="section-header">
+      <text class="title">快速选择</text>
+    </view>
+    <view class="food-grid">
+      <view class="food-item" 
+            wx:for="{{commonFoods}}" 
+            wx:key="name"
+            bindtap="selectCommonFood"
+            data-food="{{item}}">
+        <text class="food-name">{{item.name}}</text>
+        <text class="food-calories">{{item.calories}}千卡/100g</text>
+      </view>
+    </view>
+  </view>
+</view> 

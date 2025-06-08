@@ -1,0 +1,56 @@
+{
+  "pages": [
+    "miniprogram/pages/index/index",
+    "miniprogram/pages/weight/weight",
+    "miniprogram/pages/diet/diet",
+    "miniprogram/pages/exercise/exercise",
+    "miniprogram/pages/goal/goal",
+    "miniprogram/pages/profile/profile"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "体重管理助手",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#1296db",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "miniprogram/pages/index/index",
+        "text": "首页",
+        "iconPath": "miniprogram/images/home.png",
+        "selectedIconPath": "miniprogram/images/home-active.png"
+      },
+      {
+        "pagePath": "miniprogram/pages/weight/weight",
+        "text": "体重",
+        "iconPath": "miniprogram/images/weight.png",
+        "selectedIconPath": "miniprogram/images/weight-active.png"
+      },
+      {
+        "pagePath": "miniprogram/pages/diet/diet",
+        "text": "饮食",
+        "iconPath": "miniprogram/images/diet.png",
+        "selectedIconPath": "miniprogram/images/diet-active.png"
+      },
+      {
+        "pagePath": "miniprogram/pages/exercise/exercise",
+        "text": "运动",
+        "iconPath": "miniprogram/images/exercise.png",
+        "selectedIconPath": "miniprogram/images/exercise-active.png"
+      },
+      {
+        "pagePath": "miniprogram/pages/profile/profile",
+        "text": "我的",
+        "iconPath": "miniprogram/images/profile.png",
+        "selectedIconPath": "miniprogram/images/profile-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+} 

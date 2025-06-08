@@ -1,0 +1,152 @@
+.container {
+  padding: 20rpx;
+  background-color: #f7f7f7;
+  min-height: 100vh;
+}
+
+/* 时间范围选择 */
+.time-range {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.date-picker {
+  padding: 10rpx 20rpx;
+  background-color: #f7f7f7;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+
+/* 数据概览 */
+.overview {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.overview-item {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx;
+  border-right: 1rpx solid #eee;
+}
+
+.overview-item:last-child {
+  border-right: none;
+}
+
+.overview-value {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #1AAD19;
+  margin-bottom: 10rpx;
+}
+
+.overview-label {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 数据统计部分 */
+.section {
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  padding-left: 20rpx;
+  border-left: 8rpx solid #1AAD19;
+}
+
+.chart-container {
+  width: 100%;
+  height: 400rpx;
+  margin-bottom: 20rpx;
+}
+
+.chart {
+  width: 100%;
+  height: 100%;
+}
+
+/* 数据总结 */
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #eee;
+}
+
+.summary-item:last-child {
+  border-bottom: none;
+}
+
+.summary-label {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.summary-value {
+  font-size: 28rpx;
+  color: #1AAD19;
+  font-weight: bold;
+}
+
+/* 深色模式 */
+.dark-mode {
+  background-color: #1a1a1a;
+}
+
+.dark-mode .time-range,
+.dark-mode .overview,
+.dark-mode .section {
+  background-color: #2c2c2c;
+}
+
+.dark-mode .date-picker {
+  background-color: #3a3a3a;
+  color: #fff;
+}
+
+.dark-mode .overview-value {
+  color: #1AAD19;
+}
+
+.dark-mode .overview-label {
+  color: #999;
+}
+
+.dark-mode .section-title {
+  color: #fff;
+}
+
+.dark-mode .summary-label {
+  color: #fff;
+}
+
+.dark-mode .summary-value {
+  color: #1AAD19;
+}
+
+.dark-mode .summary-item {
+  border-bottom-color: #3a3a3a;
+} 

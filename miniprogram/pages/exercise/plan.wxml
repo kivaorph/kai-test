@@ -1,0 +1,87 @@
+<view class="container">
+  <!-- 计划概览 -->
+  <view class="plan-overview">
+    <view class="overview-item">
+      <text class="label">本周计划</text>
+      <text class="value">{{weeklyPlan}}分钟</text>
+    </view>
+    <view class="overview-item">
+      <text class="label">已完成</text>
+      <text class="value">{{completedTime}}分钟</text>
+    </view>
+    <view class="overview-item">
+      <text class="label">完成率</text>
+      <text class="value">{{completionRate}}%</text>
+    </view>
+  </view>
+
+  <!-- 计划设置 -->
+  <view class="plan-form">
+    <view class="form-title">设置运动计划</view>
+    
+    <!-- 运动类型 -->
+    <view class="form-item">
+      <text class="label">运动类型</text>
+      <picker mode="selector" range="{{exerciseTypes}}" range-key="name" bindchange="onTypeChange">
+        <view class="picker">{{selectedType ? selectedType.name : '请选择运动类型'}}</view>
+      </picker>
+    </view>
+
+    <!-- 运动时长 -->
+    <view class="form-item">
+      <text class="label">运动时长</text>
+      <input type="number" 
+             placeholder="请输入运动时长（分钟）" 
+             value="{{duration}}"
+             bindinput="onDurationInput"/>
+    </view>
+
+    <!-- 运动强度 -->
+    <view class="form-item">
+      <text class="label">运动强度</text>
+      <picker mode="selector" range="{{intensityLevels}}" bindchange="onIntensityChange">
+        <view class="picker">{{intensityLevels[intensity]}}</view>
+      </picker>
+    </view>
+
+    <!-- 重复设置 -->
+    <view class="form-item">
+      <text class="label">重复</text>
+      <view class="weekday-selector">
+        <view class="weekday {{item.selected ? 'selected' : ''}}" 
+              wx:for="{{weekdays}}" 
+              wx:key="day"
+              bindtap="toggleWeekday"
+              data-index="{{index}}">
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 保存按钮 -->
+    <button class="submit-btn" bindtap="savePlan">保存计划</button>
+  </view>
+
+  <!-- 计划列表 -->
+  <view class="plan-list" wx:if="{{plans.length > 0}}">
+    <view class="list-title">我的运动计划</view>
+    <view class="plan-item" wx:for="{{plans}}" wx:key="id">
+      <view class="plan-info">
+        <view class="plan-type">{{item.type.name}}</view>
+        <view class="plan-details">
+          <text class="duration">{{item.duration}}分钟</text>
+          <text class="intensity">{{intensityLevels[item.intensity]}}</text>
+        </view>
+        <view class="plan-weekdays">
+          <text wx:for="{{item.weekdays}}" 
+                wx:key="*this" 
+                class="weekday-tag">{{weekdayNames[item]}}</text>
+        </view>
+      </view>
+      <view class="plan-actions">
+        <view class="edit-btn" bindtap="editPlan" data-id="{{item.id}}">编辑</view>
+        <view class="delete-btn" bindtap="deletePlan" data-id="{{item.id}}">删除</view>
+      </view>
+    </view>
+  </view>
+</view> 

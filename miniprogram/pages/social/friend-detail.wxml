@@ -1,0 +1,101 @@
+<view class="container">
+  <!-- 用户信息卡片 -->
+  <view class="user-card">
+    <image class="avatar" src="{{friend.avatar}}" mode="aspectFill"/>
+    <view class="user-info">
+      <view class="nickname">{{friend.nickname}}</view>
+      <view class="user-id">ID: {{friend.userId}}</view>
+      <view class="status">{{friend.status}}</view>
+    </view>
+    <view class="action-buttons">
+      <button class="action-btn" bindtap="sendMessage">发消息</button>
+      <button class="action-btn {{isFriend ? 'danger' : ''}}" bindtap="toggleFriend">
+        {{isFriend ? '删除好友' : '添加好友'}}
+      </button>
+    </view>
+  </view>
+
+  <!-- 运动数据概览 -->
+  <view class="section">
+    <view class="section-title">运动数据</view>
+    <view class="stats-grid">
+      <view class="stat-item">
+        <view class="stat-value">{{friend.stats.totalExerciseTime || 0}}</view>
+        <view class="stat-label">总运动时长(分钟)</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-value">{{friend.stats.totalCalories || 0}}</view>
+        <view class="stat-label">消耗卡路里</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-value">{{friend.stats.achievedDays || 0}}</view>
+        <view class="stat-label">达标天数</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-value">{{friend.stats.currentStreak || 0}}</view>
+        <view class="stat-label">当前连续天数</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 运动记录 -->
+  <view class="section">
+    <view class="section-title">最近运动</view>
+    <view class="exercise-list">
+      <view class="exercise-item" wx:for="{{recentExercises}}" wx:key="id">
+        <view class="exercise-info">
+          <view class="exercise-type">{{item.type}}</view>
+          <view class="exercise-time">{{item.date}}</view>
+        </view>
+        <view class="exercise-details">
+          <view class="detail-item">
+            <text class="label">时长：</text>
+            <text class="value">{{item.duration}}分钟</text>
+          </view>
+          <view class="detail-item">
+            <text class="label">消耗：</text>
+            <text class="value">{{item.calories}}千卡</text>
+          </view>
+          <view class="detail-item">
+            <text class="label">强度：</text>
+            <text class="value">{{item.intensity}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 成就展示 -->
+  <view class="section">
+    <view class="section-title">获得的成就</view>
+    <view class="achievements-grid">
+      <view class="achievement-item" wx:for="{{achievements}}" wx:key="id">
+        <image class="achievement-icon" src="{{item.icon}}" mode="aspectFit"/>
+        <view class="achievement-info">
+          <view class="achievement-name">{{item.name}}</view>
+          <view class="achievement-desc">{{item.description}}</view>
+          <view class="achievement-time">获得时间：{{item.achievedTime}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 排行榜信息 -->
+  <view class="section">
+    <view class="section-title">排行榜排名</view>
+    <view class="ranking-list">
+      <view class="ranking-item">
+        <view class="ranking-type">运动榜</view>
+        <view class="ranking-rank">第{{friend.rankings.exercise || '-'}}名</view>
+      </view>
+      <view class="ranking-item">
+        <view class="ranking-type">减重榜</view>
+        <view class="ranking-rank">第{{friend.rankings.weight || '-'}}名</view>
+      </view>
+      <view class="ranking-item">
+        <view class="ranking-type">连续榜</view>
+        <view class="ranking-rank">第{{friend.rankings.streak || '-'}}名</view>
+      </view>
+    </view>
+  </view>
+</view> 

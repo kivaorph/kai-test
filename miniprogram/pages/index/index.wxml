@@ -1,0 +1,68 @@
+<view class="container">
+  <!-- 用户信息区域 -->
+  <view class="user-info">
+    <image class="avatar" src="../../images/default-avatar.png"></image>
+    <text class="nickname">{{userInfo.nickName || '未登录'}}</text>
+  </view>
+
+  <!-- 体重数据概览 -->
+  <view class="weight-overview">
+    <view class="current-weight">
+      <text class="label">当前体重</text>
+      <text class="value">{{currentWeight}}kg</text>
+    </view>
+    <view class="weight-change">
+      <text class="label">较昨日</text>
+      <text class="value {{weightChange >= 0 ? 'increase' : 'decrease'}}">
+        {{weightChange >= 0 ? '+' : ''}}{{weightChange}}kg
+      </text>
+    </view>
+  </view>
+
+  <!-- 目标进度 -->
+  <view class="goal-progress">
+    <view class="goal-header">
+      <text class="title">减重目标</text>
+      <text class="target-date">目标日期：{{targetDate}}</text>
+    </view>
+    <view class="progress-bar">
+      <view class="progress" style="width: {{progressPercentage}}%;"></view>
+    </view>
+    <view class="progress-info">
+      <text>已减重：{{lostWeight}}kg</text>
+      <text>目标：{{targetWeight}}kg</text>
+    </view>
+  </view>
+
+  <!-- 今日概览 -->
+  <view class="today-overview">
+    <view class="overview-item">
+      <text class="label">今日摄入</text>
+      <text class="value">{{todayCalories}}千卡</text>
+    </view>
+    <view class="overview-item">
+      <text class="label">今日消耗</text>
+      <text class="value">{{todayBurned}}千卡</text>
+    </view>
+    <view class="overview-item">
+      <text class="label">剩余热量</text>
+      <text class="value">{{remainingCalories}}千卡</text>
+    </view>
+  </view>
+
+  <!-- 快捷操作 -->
+  <view class="quick-actions">
+    <view class="action-item" bindtap="navigateToWeight">
+      <image src="/images/weight-icon.png"></image>
+      <text>记录体重</text>
+    </view>
+    <view class="action-item" bindtap="navigateToDiet">
+      <image src="/images/diet-icon.png"></image>
+      <text>记录饮食</text>
+    </view>
+    <view class="action-item" bindtap="navigateToExercise">
+      <image src="/images/exercise-icon.png"></image>
+      <text>记录运动</text>
+    </view>
+  </view>
+</view> 

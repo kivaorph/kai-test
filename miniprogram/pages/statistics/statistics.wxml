@@ -1,0 +1,88 @@
+<view class="container">
+  <!-- 时间范围选择 -->
+  <view class="time-range">
+    <picker mode="date" value="{{startDate}}" bindchange="onStartDateChange">
+      <view class="date-picker">{{startDate}}</view>
+    </picker>
+    <text>至</text>
+    <picker mode="date" value="{{endDate}}" bindchange="onEndDateChange">
+      <view class="date-picker">{{endDate}}</view>
+    </picker>
+  </view>
+
+  <!-- 数据概览 -->
+  <view class="overview">
+    <view class="overview-item">
+      <view class="overview-value">{{totalExerciseTime}}</view>
+      <view class="overview-label">总运动时长</view>
+    </view>
+    <view class="overview-item">
+      <view class="overview-value">{{totalCalories}}</view>
+      <view class="overview-label">总消耗卡路里</view>
+    </view>
+    <view class="overview-item">
+      <view class="overview-value">{{weightChange}}</view>
+      <view class="overview-label">体重变化</view>
+    </view>
+  </view>
+
+  <!-- 运动数据统计 -->
+  <view class="section">
+    <view class="section-title">运动数据</view>
+    <view class="chart-container">
+      <canvas canvas-id="exerciseTimeChart" class="chart"></canvas>
+    </view>
+    <view class="chart-container">
+      <canvas canvas-id="exerciseTypeChart" class="chart"></canvas>
+    </view>
+    <view class="chart-container">
+      <canvas canvas-id="exerciseIntensityChart" class="chart"></canvas>
+    </view>
+  </view>
+
+  <!-- 饮食数据统计 -->
+  <view class="section">
+    <view class="section-title">饮食数据</view>
+    <view class="chart-container">
+      <canvas canvas-id="calorieIntakeChart" class="chart"></canvas>
+    </view>
+    <view class="chart-container">
+      <canvas canvas-id="mealDistributionChart" class="chart"></canvas>
+    </view>
+    <view class="chart-container">
+      <canvas canvas-id="nutritionChart" class="chart"></canvas>
+    </view>
+  </view>
+
+  <!-- 体重数据统计 -->
+  <view class="section">
+    <view class="section-title">体重数据</view>
+    <view class="chart-container">
+      <canvas canvas-id="weightTrendChart" class="chart"></canvas>
+    </view>
+    <view class="chart-container">
+      <canvas canvas-id="bmiChart" class="chart"></canvas>
+    </view>
+  </view>
+
+  <!-- 数据总结 -->
+  <view class="section">
+    <view class="section-title">数据总结</view>
+    <view class="summary-item">
+      <view class="summary-label">最常进行的运动</view>
+      <view class="summary-value">{{mostFrequentExercise}}</view>
+    </view>
+    <view class="summary-item">
+      <view class="summary-label">平均每日运动时长</view>
+      <view class="summary-value">{{averageExerciseTime}}</view>
+    </view>
+    <view class="summary-item">
+      <view class="summary-label">平均每日卡路里摄入</view>
+      <view class="summary-value">{{averageCalorieIntake}}</view>
+    </view>
+    <view class="summary-item">
+      <view class="summary-label">体重变化趋势</view>
+      <view class="summary-value">{{weightTrend}}</view>
+    </view>
+  </view>
+</view> 

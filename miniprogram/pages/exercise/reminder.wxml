@@ -1,0 +1,63 @@
+<view class="container">
+  <!-- 提醒设置 -->
+  <view class="reminder-form">
+    <view class="form-title">运动提醒设置</view>
+    
+    <!-- 提醒开关 -->
+    <view class="form-item">
+      <text class="label">开启提醒</text>
+      <switch checked="{{enabled}}" bindchange="onEnableChange" color="#1AAD19"/>
+    </view>
+
+    <!-- 提醒时间 -->
+    <view class="form-item" wx:if="{{enabled}}">
+      <text class="label">提醒时间</text>
+      <picker mode="time" value="{{time}}" bindchange="onTimeChange">
+        <view class="picker">{{time}}</view>
+      </picker>
+    </view>
+
+    <!-- 重复设置 -->
+    <view class="form-item" wx:if="{{enabled}}">
+      <text class="label">重复</text>
+      <view class="weekday-selector">
+        <view class="weekday {{item.selected ? 'selected' : ''}}" 
+              wx:for="{{weekdays}}" 
+              wx:key="day"
+              bindtap="toggleWeekday"
+              data-index="{{index}}">
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 提醒内容 -->
+    <view class="form-item" wx:if="{{enabled}}">
+      <text class="label">提醒内容</text>
+      <input type="text" 
+             placeholder="请输入提醒内容" 
+             value="{{message}}" 
+             bindinput="onMessageInput"/>
+    </view>
+
+    <!-- 保存按钮 -->
+    <button class="submit-btn" bindtap="saveReminder" wx:if="{{enabled}}">保存设置</button>
+  </view>
+
+  <!-- 提醒列表 -->
+  <view class="reminder-list" wx:if="{{reminders.length > 0}}">
+    <view class="list-title">已设置的提醒</view>
+    <view class="reminder-item" wx:for="{{reminders}}" wx:key="id">
+      <view class="reminder-info">
+        <view class="reminder-time">{{item.time}}</view>
+        <view class="reminder-weekdays">
+          <text wx:for="{{item.weekdays}}" 
+                wx:key="*this" 
+                class="weekday-tag">{{weekdayNames[item]}}</text>
+        </view>
+        <view class="reminder-message">{{item.message}}</view>
+      </view>
+      <view class="delete-btn" bindtap="deleteReminder" data-id="{{item.id}}">删除</view>
+    </view>
+  </view>
+</view> 

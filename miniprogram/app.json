@@ -1,0 +1,68 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/weight/weight",
+    "pages/diet/diet",
+    "pages/exercise/exercise",
+    "pages/exercise/plan",
+    "pages/exercise/statistics",
+    "pages/profile/profile",
+    "pages/profile/data-export",
+    "pages/profile/settings",
+    "pages/profile/about",
+    "pages/statistics/statistics",
+    "pages/social/social",
+    "pages/social/friend-detail",
+    "pages/social/chat",
+    "pages/social/profile",
+    "pages/social/add-friend",
+    "pages/social/comment"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#4CAF50",
+    "navigationBarTitleText": "健康管理",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#4CAF50",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "miniprogram/images/home.png",
+        "selectedIconPath": "miniprogram/images/home-active.png"
+      },
+      {
+        "pagePath": "pages/weight/weight",
+        "text": "体重",
+        "iconPath": "miniprogram/images/weight.png",
+        "selectedIconPath": "miniprogram/images/weight-active.png"
+      },
+      {
+        "pagePath": "pages/diet/diet",
+        "text": "饮食",
+        "iconPath": "miniprogram/images/diet.png",
+        "selectedIconPath": "miniprogram/images/diet-active.png"
+      },
+      {
+        "pagePath": "pages/exercise/exercise",
+        "text": "运动",
+        "iconPath": "miniprogram/images/exercise.png",
+        "selectedIconPath": "miniprogram/images/exercise-active.png"
+      },
+      {
+        "pagePath": "pages/social/social",
+        "text": "社交",
+        "iconPath": "miniprogram/images/social.png",
+        "selectedIconPath": "miniprogram/images/social-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+} 

@@ -1,0 +1,74 @@
+<view class="container">
+  <!-- 体重记录表单 -->
+  <view class="weight-form">
+    <view class="form-item">
+      <text class="label">当前体重</text>
+      <input type="digit" 
+             class="input" 
+             placeholder="请输入体重(kg)" 
+             value="{{weight}}"
+             bindinput="onWeightInput"/>
+    </view>
+    <view class="form-item">
+      <text class="label">记录时间</text>
+      <picker mode="date" 
+              value="{{date}}" 
+              bindchange="onDateChange">
+        <view class="picker">
+          {{date || '请选择日期'}}
+        </view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="label">备注</text>
+      <input type="text" 
+             class="input" 
+             placeholder="添加备注（选填）" 
+             value="{{note}}"
+             bindinput="onNoteInput"/>
+    </view>
+    <button class="submit-btn" bindtap="saveWeight">保存记录</button>
+  </view>
+
+  <!-- 体重趋势图 -->
+  <view class="weight-chart">
+    <view class="chart-header">
+      <text class="title">体重趋势</text>
+      <picker mode="date" 
+              fields="month" 
+              value="{{currentMonth}}" 
+              bindchange="onMonthChange">
+        <view class="month-picker">
+          {{currentMonth || '选择月份'}}
+        </view>
+      </picker>
+    </view>
+    <view class="chart-container">
+      <canvas canvas-id="weightChart" class="chart"></canvas>
+    </view>
+  </view>
+
+  <!-- 历史记录列表 -->
+  <view class="history-list">
+    <view class="list-header">
+      <text class="title">历史记录</text>
+    </view>
+    <view class="list-content">
+      <view class="record-item" wx:for="{{weightRecords}}" wx:key="id">
+        <view class="record-info">
+          <text class="weight">{{item.weight}}kg</text>
+          <text class="date">{{item.date}}</text>
+        </view>
+        <view class="record-note" wx:if="{{item.note}}">
+          <text>{{item.note}}</text>
+        </view>
+        <view class="record-actions">
+          <button class="delete-btn" 
+                  size="mini" 
+                  bindtap="deleteRecord" 
+                  data-id="{{item.id}}">删除</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 

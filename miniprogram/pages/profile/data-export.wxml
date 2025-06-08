@@ -1,0 +1,91 @@
+<view class="container">
+  <!-- 导出选项 -->
+  <view class="section">
+    <view class="section-title">选择导出内容</view>
+    <view class="export-options">
+      <view class="option-item">
+        <checkbox checked="{{exportWeight}}" bindtap="toggleWeight"/>
+        <text class="option-name">体重记录</text>
+      </view>
+      <view class="option-item">
+        <checkbox checked="{{exportDiet}}" bindtap="toggleDiet"/>
+        <text class="option-name">饮食记录</text>
+      </view>
+      <view class="option-item">
+        <checkbox checked="{{exportExercise}}" bindtap="toggleExercise"/>
+        <text class="option-name">运动记录</text>
+      </view>
+      <view class="option-item">
+        <checkbox checked="{{exportGoals}}" bindtap="toggleGoals"/>
+        <text class="option-name">目标设置</text>
+      </view>
+      <view class="option-item">
+        <checkbox checked="{{exportAchievements}}" bindtap="toggleAchievements"/>
+        <text class="option-name">成就记录</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 时间范围 -->
+  <view class="section">
+    <view class="section-title">选择时间范围</view>
+    <view class="date-range">
+      <view class="date-picker">
+        <text class="label">开始日期</text>
+        <picker mode="date" value="{{startDate}}" bindchange="onStartDateChange">
+          <view class="picker">{{startDate}}</view>
+        </picker>
+      </view>
+      <view class="date-picker">
+        <text class="label">结束日期</text>
+        <picker mode="date" value="{{endDate}}" bindchange="onEndDateChange">
+          <view class="picker">{{endDate}}</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <!-- 导出格式 -->
+  <view class="section">
+    <view class="section-title">选择导出格式</view>
+    <view class="format-options">
+      <view class="format-item {{exportFormat === 'excel' ? 'selected' : ''}}" 
+            bindtap="selectFormat" data-format="excel">
+        <image class="format-icon" src="/images/excel-icon.png" mode="aspectFit"></image>
+        <text class="format-name">Excel</text>
+      </view>
+      <view class="format-item {{exportFormat === 'csv' ? 'selected' : ''}}" 
+            bindtap="selectFormat" data-format="csv">
+        <image class="format-icon" src="/images/csv-icon.png" mode="aspectFit"></image>
+        <text class="format-name">CSV</text>
+      </view>
+      <view class="format-item {{exportFormat === 'json' ? 'selected' : ''}}" 
+            bindtap="selectFormat" data-format="json">
+        <image class="format-icon" src="/images/json-icon.png" mode="aspectFit"></image>
+        <text class="format-name">JSON</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 导出按钮 -->
+  <view class="export-btn {{canExport ? '' : 'disabled'}}" bindtap="exportData">
+    导出数据
+  </view>
+
+  <!-- 导出历史 -->
+  <view class="section" wx:if="{{exportHistory.length > 0}}">
+    <view class="section-title">导出历史</view>
+    <view class="history-list">
+      <view class="history-item" wx:for="{{exportHistory}}" wx:key="id">
+        <view class="history-info">
+          <text class="history-date">{{item.date}}</text>
+          <text class="history-format">{{item.format}}</text>
+        </view>
+        <view class="history-actions">
+          <view class="action-btn" bindtap="downloadFile" data-id="{{item.id}}">下载</view>
+          <view class="action-btn delete" bindtap="deleteHistory" data-id="{{item.id}}">删除</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 

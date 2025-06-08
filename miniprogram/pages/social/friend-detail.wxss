@@ -1,0 +1,265 @@
+.container {
+  padding: 20rpx;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* 用户信息卡片 */
+.user-card {
+  background-color: #fff;
+  border-radius: 10rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.nickname {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.user-id {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 10rpx;
+}
+
+.status {
+  font-size: 24rpx;
+  color: #4CAF50;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.action-btn {
+  font-size: 24rpx;
+  padding: 10rpx 20rpx;
+  background-color: #4CAF50;
+  color: #fff;
+  border-radius: 30rpx;
+  line-height: 1.5;
+}
+
+.action-btn.danger {
+  background-color: #f44336;
+}
+
+/* 通用部分样式 */
+.section {
+  background-color: #fff;
+  border-radius: 10rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+/* 运动数据概览 */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+}
+
+.stat-item {
+  background-color: #f8f8f8;
+  border-radius: 10rpx;
+  padding: 20rpx;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #4CAF50;
+  margin-bottom: 10rpx;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 运动记录 */
+.exercise-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.exercise-item {
+  background-color: #f8f8f8;
+  border-radius: 10rpx;
+  padding: 20rpx;
+}
+
+.exercise-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+
+.exercise-type {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.exercise-time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.exercise-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.detail-item {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.detail-item .label {
+  color: #999;
+}
+
+.detail-item .value {
+  color: #333;
+  margin-left: 10rpx;
+}
+
+/* 成就展示 */
+.achievements-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.achievement-item {
+  display: flex;
+  align-items: center;
+  background-color: #f8f8f8;
+  border-radius: 10rpx;
+  padding: 20rpx;
+}
+
+.achievement-icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 20rpx;
+}
+
+.achievement-info {
+  flex: 1;
+}
+
+.achievement-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5rpx;
+}
+
+.achievement-desc {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 5rpx;
+}
+
+.achievement-time {
+  font-size: 22rpx;
+  color: #999;
+}
+
+/* 排行榜信息 */
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.ranking-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f8f8;
+  border-radius: 10rpx;
+  padding: 20rpx;
+}
+
+.ranking-type {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.ranking-rank {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #4CAF50;
+}
+
+/* 深色模式 */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background-color: #1a1a1a;
+  }
+
+  .user-card,
+  .section {
+    background-color: #2c2c2c;
+  }
+
+  .nickname,
+  .exercise-type,
+  .achievement-name,
+  .ranking-type {
+    color: #fff;
+  }
+
+  .user-id,
+  .status,
+  .stat-label,
+  .exercise-time,
+  .achievement-desc,
+  .achievement-time {
+    color: #999;
+  }
+
+  .stat-item,
+  .exercise-item,
+  .achievement-item,
+  .ranking-item {
+    background-color: #3a3a3a;
+  }
+
+  .detail-item .value {
+    color: #fff;
+  }
+} 

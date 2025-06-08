@@ -1,0 +1,122 @@
+<view class="container">
+  <!-- 顶部导航 -->
+  <view class="nav-tabs">
+    <view class="tab {{currentTab === 'friends' ? 'active' : ''}}" bindtap="switchTab" data-tab="friends">
+      <text>好友</text>
+    </view>
+    <view class="tab {{currentTab === 'ranking' ? 'active' : ''}}" bindtap="switchTab" data-tab="ranking">
+      <text>排行榜</text>
+    </view>
+    <view class="tab {{currentTab === 'moments' ? 'active' : ''}}" bindtap="switchTab" data-tab="moments">
+      <text>动态</text>
+    </view>
+  </view>
+
+  <!-- 好友列表 -->
+  <view class="tab-content" wx:if="{{currentTab === 'friends'}}">
+    <view class="search-bar">
+      <input type="text" placeholder="搜索好友" bindinput="searchFriends" value="{{searchKeyword}}"/>
+    </view>
+    <view class="friend-list">
+      <view class="friend-item" wx:for="{{friends}}" wx:key="id" bindtap="showFriendDetail" data-id="{{item.id}}">
+        <image class="avatar" src="{{item.avatar}}" mode="aspectFill"/>
+        <view class="friend-info">
+          <view class="nickname">{{item.nickname}}</view>
+          <view class="status">{{item.status}}</view>
+        </view>
+        <view class="friend-actions">
+          <button class="action-btn" catchtap="sendMessage" data-id="{{item.id}}">发消息</button>
+          <button class="action-btn" catchtap="viewProfile" data-id="{{item.id}}">查看资料</button>
+        </view>
+      </view>
+    </view>
+    <view class="add-friend">
+      <button class="add-btn" bindtap="showAddFriend">添加好友</button>
+    </view>
+  </view>
+
+  <!-- 排行榜 -->
+  <view class="tab-content" wx:if="{{currentTab === 'ranking'}}">
+    <view class="ranking-tabs">
+      <view class="ranking-tab {{rankingType === 'exercise' ? 'active' : ''}}" 
+            bindtap="switchRankingType" data-type="exercise">运动榜</view>
+      <view class="ranking-tab {{rankingType === 'weight' ? 'active' : ''}}" 
+            bindtap="switchRankingType" data-type="weight">减重榜</view>
+      <view class="ranking-tab {{rankingType === 'streak' ? 'active' : ''}}" 
+            bindtap="switchRankingType" data-type="streak">连续榜</view>
+    </view>
+    <view class="ranking-list">
+      <view class="ranking-item" wx:for="{{rankings}}" wx:key="id">
+        <view class="rank {{index < 3 ? 'top-' + (index + 1) : ''}}">{{index + 1}}</view>
+        <image class="avatar" src="{{item.avatar}}" mode="aspectFill"/>
+        <view class="user-info">
+          <view class="nickname">{{item.nickname}}</view>
+          <view class="score">{{item.score}}</view>
+        </view>
+        <view class="trend {{item.trend > 0 ? 'up' : item.trend < 0 ? 'down' : ''}}">
+          {{item.trend > 0 ? '↑' : item.trend < 0 ? '↓' : '-'}}
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 动态列表 -->
+  <view class="tab-content" wx:if="{{currentTab === 'moments'}}">
+    <view class="post-form">
+      <textarea placeholder="分享你的健康生活..." bindinput="onPostInput" value="{{postContent}}"/>
+      <view class="post-actions">
+        <view class="action-item" bindtap="chooseImage">
+          <image src="/images/camera.png" mode="aspectFit"/>
+          <text>图片</text>
+        </view>
+        <view class="action-item" bindtap="chooseLocation">
+          <image src="/images/location.png" mode="aspectFit"/>
+          <text>位置</text>
+        </view>
+        <button class="post-btn" bindtap="publishPost">发布</button>
+      </view>
+    </view>
+    <view class="moments-list">
+      <view class="moment-item" wx:for="{{moments}}" wx:key="id">
+        <view class="moment-header">
+          <image class="avatar" src="{{item.user.avatar}}" mode="aspectFill"/>
+          <view class="user-info">
+            <view class="nickname">{{item.user.nickname}}</view>
+            <view class="time">{{item.time}}</view>
+          </view>
+        </view>
+        <view class="moment-content">
+          <text>{{item.content}}</text>
+          <view class="image-list" wx:if="{{item.images.length > 0}}">
+            <image wx:for="{{item.images}}" wx:key="*this" wx:for-item="image" 
+                   src="{{image}}" mode="aspectFill" bindtap="previewImage" data-urls="{{item.images}}" data-current="{{image}}"/>
+          </view>
+          <view class="location" wx:if="{{item.location}}">
+            <image src="/images/location.png" mode="aspectFit"/>
+            <text>{{item.location}}</text>
+          </view>
+        </view>
+        <view class="moment-actions">
+          <view class="action" bindtap="likeMoment" data-id="{{item.id}}">
+            <image src="{{item.isLiked ? '/images/like-active.png' : '/images/like.png'}}" mode="aspectFit"/>
+            <text>{{item.likes}}</text>
+          </view>
+          <view class="action" bindtap="commentMoment" data-id="{{item.id}}">
+            <image src="/images/comment.png" mode="aspectFit"/>
+            <text>{{item.comments.length}}</text>
+          </view>
+          <view class="action" bindtap="shareMoment" data-id="{{item.id}}">
+            <image src="/images/share.png" mode="aspectFit"/>
+            <text>分享</text>
+          </view>
+        </view>
+        <view class="comment-list" wx:if="{{item.comments.length > 0}}">
+          <view class="comment-item" wx:for="{{item.comments}}" wx:key="id" wx:for-item="comment">
+            <text class="comment-user">{{comment.user.nickname}}</text>
+            <text class="comment-content">{{comment.content}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 

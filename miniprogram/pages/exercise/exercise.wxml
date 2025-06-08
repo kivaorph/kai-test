@@ -1,0 +1,97 @@
+<view class="container">
+  <!-- 今日运动概览 -->
+  <view class="overview">
+    <view class="overview-item">
+      <text class="label">今日运动时长</text>
+      <text class="value">{{totalDuration}}分钟</text>
+    </view>
+    <view class="overview-item">
+      <text class="label">消耗热量</text>
+      <text class="value">{{totalCalories}}千卡</text>
+    </view>
+    <view class="overview-item">
+      <text class="label">本周进度</text>
+      <text class="value">{{weeklyProgress}}%</text>
+    </view>
+  </view>
+
+  <!-- 添加运动记录表单 -->
+  <view class="exercise-form">
+    <view class="form-title">添加运动记录</view>
+    <view class="form-item">
+      <text class="label">运动类型</text>
+      <picker bindchange="onExerciseTypeChange" value="{{exerciseTypeIndex}}" range="{{exerciseTypes}}">
+        <view class="picker">{{exerciseTypes[exerciseTypeIndex]}}</view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="label">运动时长</text>
+      <input type="digit" placeholder="请输入运动时长（分钟）" value="{{duration}}" bindinput="onDurationInput"/>
+    </view>
+    <view class="form-item">
+      <text class="label">消耗热量</text>
+      <input type="digit" placeholder="请输入消耗热量（千卡）" value="{{calories}}" bindinput="onCaloriesInput"/>
+    </view>
+    <view class="form-item">
+      <text class="label">运动时间</text>
+      <picker mode="time" value="{{time}}" bindchange="onTimeChange">
+        <view class="picker">{{time}}</view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="label">备注</text>
+      <input type="text" placeholder="添加备注信息" value="{{note}}" bindinput="onNoteInput"/>
+    </view>
+    
+    <!-- 运动强度和建议 -->
+    <view class="exercise-info" wx:if="{{intensity || recommendation}}">
+      <view class="info-item" wx:if="{{intensity}}">
+        <text class="info-label">运动强度：</text>
+        <text class="info-value">{{intensity}}</text>
+      </view>
+      <view class="info-item" wx:if="{{recommendation}}">
+        <text class="info-label">运动建议：</text>
+        <text class="info-value">{{recommendation}}</text>
+      </view>
+    </view>
+
+    <button class="submit-btn" bindtap="saveExercise">保存记录</button>
+  </view>
+
+  <!-- 今日运动记录列表 -->
+  <view class="exercise-list">
+    <view class="list-title">今日运动记录</view>
+    <block wx:if="{{exerciseGroups.length > 0}}">
+      <view class="exercise-group" wx:for="{{exerciseGroups}}" wx:key="time">
+        <view class="group-time">{{item.time}}</view>
+        <view class="exercise-item" wx:for="{{item.items}}" wx:for-item="exercise" wx:key="id">
+          <view class="exercise-info">
+            <view class="exercise-name">{{exercise.type}}</view>
+            <view class="exercise-detail">
+              <text>时长：{{exercise.duration}}分钟</text>
+              <text>消耗：{{exercise.calories}}千卡</text>
+              <text wx:if="{{exercise.intensity}}">强度：{{exercise.intensity}}</text>
+            </view>
+            <view class="exercise-note" wx:if="{{exercise.note}}">{{exercise.note}}</view>
+          </view>
+          <view class="delete-btn" bindtap="deleteRecord" data-id="{{exercise.id}}">删除</view>
+        </view>
+      </view>
+    </block>
+    <view class="empty-tip" wx:else>暂无运动记录</view>
+  </view>
+
+  <!-- 常见运动类型 -->
+  <view class="quick-select">
+    <view class="section-title">常见运动类型</view>
+    <view class="exercise-grid">
+      <view class="exercise-card" wx:for="{{commonExercises}}" wx:key="type" bindtap="selectCommonExercise" data-exercise="{{item}}">
+        <view class="exercise-name">{{item.type}}</view>
+        <view class="exercise-detail">
+          <text>{{item.caloriesPerHour}}千卡/小时</text>
+          <text>{{item.intensity}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 

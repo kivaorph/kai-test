@@ -1,0 +1,68 @@
+<view class="container">
+  <!-- 时间范围选择 -->
+  <view class="time-range">
+    <picker mode="date" fields="month" value="{{currentMonth}}" bindchange="onMonthChange">
+      <view class="picker">{{currentMonth}}</view>
+    </picker>
+  </view>
+
+  <!-- 月度概览 -->
+  <view class="overview">
+    <view class="overview-item">
+      <text class="label">总运动时长</text>
+      <text class="value">{{totalDuration}}分钟</text>
+    </view>
+    <view class="overview-item">
+      <text class="label">总消耗热量</text>
+      <text class="value">{{totalCalories}}千卡</text>
+    </view>
+    <view class="overview-item">
+      <text class="label">达标天数</text>
+      <text class="value">{{achievedDays}}天</text>
+    </view>
+  </view>
+
+  <!-- 运动时长趋势图 -->
+  <view class="chart-section">
+    <view class="section-title">运动时长趋势</view>
+    <view class="chart-container">
+      <canvas canvas-id="durationChart" class="chart"></canvas>
+    </view>
+  </view>
+
+  <!-- 运动类型分布 -->
+  <view class="chart-section">
+    <view class="section-title">运动类型分布</view>
+    <view class="chart-container">
+      <canvas canvas-id="typeChart" class="chart"></canvas>
+    </view>
+  </view>
+
+  <!-- 运动强度分布 -->
+  <view class="chart-section">
+    <view class="section-title">运动强度分布</view>
+    <view class="chart-container">
+      <canvas canvas-id="intensityChart" class="chart"></canvas>
+    </view>
+  </view>
+
+  <!-- 运动成就 -->
+  <view class="achievements">
+    <view class="section-title">运动成就</view>
+    <view class="achievement-list">
+      <view class="achievement-item {{item.achieved ? 'achieved' : ''}}" 
+            wx:for="{{achievements}}" 
+            wx:key="id">
+        <view class="achievement-icon">{{item.achieved ? '🏆' : '🎯'}}</view>
+        <view class="achievement-info">
+          <view class="achievement-name">{{item.name}}</view>
+          <view class="achievement-desc">{{item.description}}</view>
+        </view>
+        <view class="achievement-progress" wx:if="{{!item.achieved}}">
+          <progress percent="{{item.progress}}" stroke-width="3" color="#1AAD19"/>
+          <text class="progress-text">{{item.progress}}%</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 
