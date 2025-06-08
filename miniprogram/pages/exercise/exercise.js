@@ -29,7 +29,11 @@ Page({
     recommendation: '',
     weeklyGoal: 150, // 每周运动目标（分钟）
     weeklyProgress: 0,
-    weeklyCalories: 0
+    weeklyCalories: 0,
+    showQuickExerciseModal: false,
+    quickExercise: {},
+    quickExerciseDuration: '',
+    quickExerciseCalories: 0
   },
 
   onLoad() {
@@ -192,11 +196,48 @@ Page({
   // 选择常见运动类型
   selectCommonExercise(e) {
     const exercise = e.currentTarget.dataset.exercise
-    const typeIndex = this.data.exerciseTypes.findIndex(type => type === exercise.type)
     this.setData({
-      exerciseTypeIndex: typeIndex >= 0 ? typeIndex : 0,
-      intensity: exercise.intensity,
-      recommendation: this.getExerciseRecommendation(exercise.type, this.data.duration)
+      quickExercise: exercise,
+      quickExerciseDuration: '',
+      quickExerciseCalories: 0,
+      showQuickExerciseModal: true
+    })
+  },
+
+  // 关闭弹窗
+  closeQuickExerciseModal() {
+    this.setData({ showQuickExerciseModal: false })
+  },
+
+  // 输入时长
+  onQuickExerciseDurationInput(e) {
+    const duration = e.detail.value
+    const caloriesPerHour = this.data.quickExercise.caloriesPerHour
+    let quickExerciseCalories = 0
+    if (duration && caloriesPerHour) {
+      quickExerciseCalories = ((parseFloat(duration) * parseFloat(caloriesPerHour)) / 60).toFixed(1)
+    }
+    this.setData({
+      quickExerciseDuration: duration,
+      quickExerciseCalories
+    })
+  },
+
+  // 确认快捷添加
+  confirmQuickExercise() {
+    const { quickExercise, quickExerciseDuration, quickExerciseCalories, exerciseTypes } = this.data
+    if (!quickExercise.type || !quickExerciseDuration || !quickExerciseCalories) {
+      wx.showToast({ title: '请填写时长', icon: 'none' })
+      return
+    }
+    // 找到运动类型在下拉列表中的索引
+    const exerciseTypeIndex = exerciseTypes.findIndex(type => type === quickExercise.type)
+    this.setData({
+      exerciseTypeIndex: exerciseTypeIndex >= 0 ? exerciseTypeIndex : 0,
+      duration: quickExerciseDuration,
+      calories: quickExerciseCalories,
+      intensity: quickExercise.intensity || '',
+      showQuickExerciseModal: false
     })
   },
 

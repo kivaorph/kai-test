@@ -1,3 +1,7 @@
 {
-    "usingComponents": {}
+    "usingComponents": {},
+    "navigationBarTitleText": "我的",
+    "navigationStyle": "default",
+    "disableScroll": true,
+    "hidden": true
 }

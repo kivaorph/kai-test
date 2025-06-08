@@ -19,18 +19,33 @@
     </view>
   </view>
 
-  <!-- 目标进度 -->
-  <view class="goal-progress">
+  <!-- 减重目标 -->
+  <view class="goal-card">
     <view class="goal-header">
-      <text class="title">减重目标</text>
-      <text class="target-date">目标日期：{{targetDate}}</text>
+      <text class="goal-title">减重目标</text>
+      <view class="goal-edit" bindtap="showGoalModal">
+        <text class="edit-text">设置目标</text>
+      </view>
     </view>
-    <view class="progress-bar">
-      <view class="progress" style="width: {{progressPercentage}}%;"></view>
-    </view>
-    <view class="progress-info">
-      <text>已减重：{{lostWeight}}kg</text>
-      <text>目标：{{targetWeight}}kg</text>
+    <view class="goal-content">
+      <view class="goal-item">
+        <text class="goal-label">目标体重</text>
+        <text class="goal-value">{{targetWeight}}kg</text>
+      </view>
+      <view class="goal-item">
+        <text class="goal-label">目标日期</text>
+        <text class="goal-value">{{targetDate}}</text>
+      </view>
+      <view class="goal-item goal-item-target">
+        <text class="goal-label">距离目标</text>
+        <text class="goal-value {{weightToLose > 0 ? 'value-warning' : 'value-success'}}">
+          {{weightToLose > 0 ? weightToLose + 'kg' : '目标完成'}}
+        </text>
+      </view>
+      <view class="goal-item">
+        <text class="goal-label">剩余天数</text>
+        <text class="goal-value value-important">{{daysRemaining}}天</text>
+      </view>
     </view>
   </view>
 
@@ -51,7 +66,7 @@
   </view>
 
   <!-- 快捷操作 -->
-  <view class="quick-actions">
+  <!-- <view class="quick-actions">
     <view class="action-item" bindtap="navigateToWeight">
       <image src="/images/weight-icon.png"></image>
       <text>记录体重</text>
@@ -63,6 +78,34 @@
     <view class="action-item" bindtap="navigateToExercise">
       <image src="/images/exercise-icon.png"></image>
       <text>记录运动</text>
+    </view>
+  </view> -->
+
+  <!-- 设置目标弹窗 -->
+  <view class="modal" wx:if="{{showGoalModal}}">
+    <view class="modal-mask" bindtap="hideGoalModal"></view>
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">设置减重目标</text>
+      </view>
+      <view class="modal-body">
+        <view class="input-group">
+          <text class="input-label">目标体重(kg)</text>
+          <input type="digit" class="input-field" value="{{newTargetWeight}}" bindinput="onTargetWeightInput" placeholder="请输入目标体重"/>
+        </view>
+        <view class="input-group">
+          <text class="input-label">目标日期</text>
+          <picker mode="date" value="{{newTargetDate}}" start="{{minDate}}" end="{{maxDate}}" bindchange="onTargetDateChange">
+            <view class="picker">
+              {{newTargetDate || '请选择目标日期'}}
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="btn-cancel" bindtap="hideGoalModal">取消</button>
+        <button class="btn-confirm" bindtap="saveGoal">确定</button>
+      </view>
     </view>
   </view>
 </view> 

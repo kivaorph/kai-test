@@ -55,12 +55,19 @@
     </view>
     <view class="list-content">
       <view class="record-item" wx:for="{{weightRecords}}" wx:key="id">
-        <view class="record-info">
-          <text class="weight">{{item.weight}}kg</text>
-          <text class="date">{{item.date}}</text>
+        <view class="record-main">
+          <view class="record-weight">
+            <text class="weight-value">{{item.weight}}</text>
+            <text class="weight-unit">kg</text>
+          </view>
+          <view class="record-date">
+            <text class="date-label">记录时间：</text>
+            <text class="date-value">{{item.formattedDate}}</text>
+          </view>
         </view>
         <view class="record-note" wx:if="{{item.note}}">
-          <text>{{item.note}}</text>
+          <text class="note-label">备注：</text>
+          <text class="note-value">{{item.note}}</text>
         </view>
         <view class="record-actions">
           <button class="delete-btn" 

@@ -14,5 +14,22 @@ App({
         traceUser: true
       })
     }
+
+    // 初始化数据
+    this.initData()
+  },
+
+  // 初始化数据
+  initData() {
+    // 从本地存储加载数据
+    const weightRecords = wx.getStorageSync('weightRecords') || []
+    const dietRecords = wx.getStorageSync('dietRecords') || []
+    const exerciseRecords = wx.getStorageSync('exerciseRecords') || []
+    const goals = wx.getStorageSync('goals') || []
+
+    this.globalData.weightRecords = weightRecords
+    this.globalData.dietRecords = dietRecords
+    this.globalData.exerciseRecords = exerciseRecords
+    this.globalData.goals = goals
   }
 }) 

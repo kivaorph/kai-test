@@ -110,4 +110,28 @@
       </view>
     </view>
   </view>
+
+  <!-- 快捷食物份量输入弹窗 -->
+  <view class="modal" wx:if="{{showQuickFoodModal}}">
+    <view class="modal-mask" bindtap="closeQuickFoodModal"></view>
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">{{quickFood.name}} - 请输入份量</text>
+      </view>
+      <view class="modal-body">
+        <view class="input-group">
+          <text class="input-label">份量(g)</text>
+          <input type="digit" class="input-field" value="{{quickFoodAmount}}" bindinput="onQuickFoodAmountInput" placeholder="请输入克数"/>
+        </view>
+        <view class="preview-group">
+          <text class="preview-label">预计热量：</text>
+          <text class="preview-value">{{quickFoodCalories}} 千卡</text>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="btn-cancel" bindtap="closeQuickFoodModal">取消</button>
+        <button class="btn-confirm" bindtap="confirmQuickFood">确定</button>
+      </view>
+    </view>
+  </view>
 </view> 

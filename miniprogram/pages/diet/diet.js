@@ -28,7 +28,11 @@ Page({
     targetCalories: 2000, // 默认目标摄入量
     remainingCalories: 2000,
     mealGroups: [],
-    commonFoods
+    commonFoods,
+    showQuickFoodModal: false,
+    quickFood: {},
+    quickFoodAmount: '',
+    quickFoodCalories: 0,
   },
 
   onLoad() {
@@ -124,8 +128,44 @@ Page({
   selectCommonFood(e) {
     const food = e.currentTarget.dataset.food
     this.setData({
-      foodName: food.name,
-      calories: food.calories
+      quickFood: food,
+      quickFoodAmount: '',
+      quickFoodCalories: 0,
+      showQuickFoodModal: true
+    })
+  },
+
+  // 关闭弹窗
+  closeQuickFoodModal() {
+    this.setData({ showQuickFoodModal: false })
+  },
+
+  // 输入克数
+  onQuickFoodAmountInput(e) {
+    const amount = e.detail.value
+    const calories = this.data.quickFood.calories
+    let quickFoodCalories = 0
+    if (amount && calories) {
+      quickFoodCalories = ((parseFloat(amount) * parseFloat(calories)) / 100).toFixed(1)
+    }
+    this.setData({
+      quickFoodAmount: amount,
+      quickFoodCalories
+    })
+  },
+
+  // 确认快捷添加
+  confirmQuickFood() {
+    const { quickFood, quickFoodAmount, quickFoodCalories } = this.data
+    if (!quickFood.name || !quickFoodAmount || !quickFoodCalories) {
+      wx.showToast({ title: '请填写份量', icon: 'none' })
+      return
+    }
+    this.setData({
+      foodName: quickFood.name,
+      amount: quickFoodAmount,
+      calories: quickFoodCalories,
+      showQuickFoodModal: false
     })
   },
 

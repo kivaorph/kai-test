@@ -42,12 +42,6 @@
         "text": "运动",
         "iconPath": "miniprogram/images/exercise.png",
         "selectedIconPath": "miniprogram/images/exercise-active.png"
-      },
-      {
-        "pagePath": "miniprogram/pages/profile/profile",
-        "text": "我的",
-        "iconPath": "miniprogram/images/profile.png",
-        "selectedIconPath": "miniprogram/images/profile-active.png"
       }
     ]
   },

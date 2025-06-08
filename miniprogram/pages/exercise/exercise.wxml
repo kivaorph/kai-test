@@ -94,4 +94,28 @@
       </view>
     </view>
   </view>
+
+  <!-- 快捷运动填写弹窗 -->
+  <view class="modal" wx:if="{{showQuickExerciseModal}}">
+    <view class="modal-mask" bindtap="closeQuickExerciseModal"></view>
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">{{quickExercise.type}} - 请输入时长</text>
+      </view>
+      <view class="modal-body">
+        <view class="input-group">
+          <text class="input-label">时长(分钟)</text>
+          <input type="digit" class="input-field" value="{{quickExerciseDuration}}" bindinput="onQuickExerciseDurationInput" placeholder="请输入时长"/>
+        </view>
+        <view class="preview-group">
+          <text class="preview-label">预计消耗：</text>
+          <text class="preview-value">{{quickExerciseCalories}} 千卡</text>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="btn-cancel" bindtap="closeQuickExerciseModal">取消</button>
+        <button class="btn-confirm" bindtap="confirmQuickExercise">确定</button>
+      </view>
+    </view>
+  </view>
 </view> 

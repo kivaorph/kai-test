@@ -77,11 +77,25 @@ const clearAllData = () => {
 // 保存体重记录
 const saveWeightRecord = (record) => {
   const records = getData(KEYS.WEIGHT_RECORDS) || []
-  records.push({
-    ...record,
-    id: Date.now().toString(),
-    date: new Date().toISOString()
-  })
+  const recordDate = record.date.split('T')[0]
+  
+  // 查找同一天的记录
+  const existingRecordIndex = records.findIndex(r => r.date.split('T')[0] === recordDate)
+  
+  if (existingRecordIndex !== -1) {
+    // 如果存在同一天的记录，更新它
+    records[existingRecordIndex] = {
+      ...record,
+      id: records[existingRecordIndex].id // 保持原有ID
+    }
+  } else {
+    // 如果不存在同一天的记录，添加新记录
+    records.push({
+      ...record,
+      id: Date.now().toString()
+    })
+  }
+  
   return saveData(KEYS.WEIGHT_RECORDS, records)
 }
 
@@ -486,6 +500,21 @@ function setWeightRecords(records) {
   return saveData(KEYS.WEIGHT_RECORDS, records);
 }
 
+// 更新体重记录
+const updateWeightRecord = (record) => {
+  const records = getData(KEYS.WEIGHT_RECORDS) || []
+  const index = records.findIndex(r => r.id === record.id)
+  
+  if (index !== -1) {
+    records[index] = {
+      ...record,
+      date: record.date // 保持原有日期
+    }
+    return saveData(KEYS.WEIGHT_RECORDS, records)
+  }
+  return false
+}
+
 // 导出所有方法
 module.exports = {
   KEYS,
@@ -546,5 +575,6 @@ module.exports = {
   getFriendAchievements,
   getFriendRankings,
   getWeightRecords,
-  setWeightRecords
+  setWeightRecords,
+  updateWeightRecord
 } 
